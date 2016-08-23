@@ -116,7 +116,7 @@ defmodule ExIcal.DateParser do
   def parse(<< year :: binary-size(4), month :: binary-size(2), day :: binary-size(2) >>, _timezone) do
     {year, month, day}
     |> to_integers
-    |> Date.from(:utc)
+    |> Timex.Date.from(:utc)
   end
 
   @spec to_integers({String.t, String.t, String.t}) :: {integer, integer, integer}
