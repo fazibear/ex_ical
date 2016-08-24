@@ -1,5 +1,5 @@
 defmodule ExIcal.Recurrence do
-  use Timex
+  alias Timex.{Date,DateTime}
 
   def add_recurring_events(events, end_date \\ Date.now) do
     events ++ (events |> Enum.reduce([], fn(event, revents) ->

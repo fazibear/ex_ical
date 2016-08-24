@@ -1,6 +1,6 @@
 defmodule ExIcal.Utils do
   alias ExIcal.Recurrence
-  use Timex
+  alias Timex.{Date,DateTime}
 
   def by_range(events, start_date, end_date) do
     events |> Recurrence.add_recurring_events(end_date) |> Enum.filter(fn(event) ->
