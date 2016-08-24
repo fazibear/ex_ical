@@ -14,19 +14,19 @@ defmodule ExIcal.Utils do
     end)
   end
 
-  def date_before?(date1, date2) do
-      case Date.compare(date1, date2) do
-       -1 -> true
-        0 -> true
-        1 -> false
-      end
+  defp date_before?(date1, date2) do
+    case Date.compare(date1, date2) do
+      -1 -> true
+      0  -> true
+      1  -> false
+    end
   end
 
-  def date_after?(date1, date2) do
-      case Date.compare(date1, date2) do
-       -1 -> false
-        0 -> true
-        1 -> true
-      end
+  defp date_after?(date1, date2) do
+    case Date.compare(date1, date2) do
+      -1 -> false
+      0  -> true
+      1  -> true
+    end
   end
 end
