@@ -69,6 +69,7 @@ defmodule ExIcal.DateParser do
 
   @type valid_timezone :: String.t | :utc | :local
 
+  @spec parse(String.t)                       :: %Timex.DateTime{}
   @spec parse(String.t, valid_timezone | nil) :: %Timex.DateTime{}
   def parse(data, tzid \\ nil)
 
