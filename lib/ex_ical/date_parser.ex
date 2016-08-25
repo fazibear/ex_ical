@@ -4,7 +4,7 @@ defmodule ExIcal.DateParser do
   `parse/2`.
   """
 
-  alias Timex.Date
+  alias Timex.{Date,DateTime}
 
   @doc """
   Responsible for parsing datestrings in predefined formats into %DateTime{}
@@ -69,8 +69,8 @@ defmodule ExIcal.DateParser do
 
   @type valid_timezone :: String.t | :utc | :local
 
-  @spec parse(String.t)                       :: %Timex.DateTime{}
-  @spec parse(String.t, valid_timezone | nil) :: %Timex.DateTime{}
+  @spec parse(String.t)                       :: %DateTime{}
+  @spec parse(String.t, valid_timezone | nil) :: %DateTime{}
   def parse(data, tzid \\ nil)
 
   # Date Format: "19690620T201804Z", Timezone: *

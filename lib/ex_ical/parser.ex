@@ -1,6 +1,5 @@
 defmodule ExIcal.Parser do
-  alias ExIcal.DateParser
-  alias ExIcal.Event
+  alias ExIcal.{DateParser,Event}
 
   @spec parse(String.t) :: [%Event{}]
   def parse(data) do
