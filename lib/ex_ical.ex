@@ -1,4 +1,26 @@
 defmodule ExIcal do
+  @moduledoc """
+  iCalendar parser for [Elixir](http://elixir-lang.org).
+
+  ## Installation
+
+  Add ex_ical to your list of dependencies in `mix.exs`:
+
+  ```elixir
+    def deps do
+      [{:ex_ical, "~> 0.0.4"}]
+    end
+  ```
+
+  ## Usage
+
+  ```elixir
+    HTTPotion.get("url-for-icalendar").body
+      |> ExIcal.parse
+      |> ExIcal.by_range(Date.now, Date.now |> Date.shift(days: 7))
+  ```
+  """
+
   alias ExIcal.{Parser,Recurrence,Utils,Event}
   alias Timex.DateTime
 

@@ -1,6 +1,18 @@
 defmodule ExIcal.Recurrence do
+  @moduledoc """
+  Recurring events support.
+  """
+
   alias ExIcal.Event
   alias Timex.{Date,DateTime}
+
+  @doc """
+  Add recurring events to events list.
+
+  ## Parameters
+    - events: events list
+    - end_date: how long recurrence will occur
+  """
 
   @spec add_recurring_events([%Event{}])              :: [%Event{}]
   @spec add_recurring_events([%Event{}], %DateTime{}) :: [%Event{}]

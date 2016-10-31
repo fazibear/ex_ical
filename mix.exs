@@ -10,7 +10,11 @@ defmodule ExIcal.Mixfile do
       deps: deps,
       dialyzer: [plt_add_deps: true],
       build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod
+      start_permanent: Mix.env == :prod,
+      docs: [
+        main: ExIcal,
+        source_url: "https://github.com/fazibear/export"
+      ]
     ]
   end
 
@@ -32,7 +36,7 @@ defmodule ExIcal.Mixfile do
   defp deps do
     [
       {:earmark, "~> 0.1", only: :dev},
-      {:ex_doc, "~> 0.11", only: :dev},
+      {:ex_doc, ">= 0.0.0", only: :dev},
       {:credo, "~> 0.4.0", only: [:dev, :test]},
       {:timex, "~> 1.0"}
     ]

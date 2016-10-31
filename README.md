@@ -10,7 +10,7 @@ Add ex_ical to your list of dependencies in `mix.exs`:
 
 ```elixir
   def deps do
-    [{:ex_ical, "~> 0.0.3"}]
+    [{:ex_ical, "~> 0.0.4"}]
   end
 ```
 

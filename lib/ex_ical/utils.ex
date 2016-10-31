@@ -1,6 +1,19 @@
 defmodule ExIcal.Utils do
+  @moduledoc """
+  Helper methods for events list.
+  """
+
   alias ExIcal.{Recurrence,Event}
   alias Timex.{Date,DateTime}
+
+  @doc """
+  Select events by dates range.
+
+  ## Parameters
+    - events: events list
+    - start_date: Filter events after this date
+    - end_date: Filter events before this date
+  """
 
   @spec by_range([%Event{}], %DateTime{}, %DateTime{}) :: [%Event{}]
   def by_range(events, start_date, end_date) do
@@ -8,6 +21,13 @@ defmodule ExIcal.Utils do
       date_after?(event.start, start_date) && date_before?(event.start, end_date) && date_after?(event.end, start_date) && date_before?(event.end, end_date)
     end) |> sort_by_date
   end
+
+  @doc """
+  Sort events by date
+
+  ## Parameters
+    - events: events list
+  """
 
   @spec sort_by_date([%Event{}]) :: [%Event{}]
   def sort_by_date(events) do
