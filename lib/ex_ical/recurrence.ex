@@ -1,17 +1,58 @@
 defmodule ExIcal.Recurrence do
   @moduledoc """
-  Recurring events support.
+  Adds support for recurring events.
+
+  Events can recur by frequency, count, interval, and/or start/end date. To
+  see the specific rules and examples, see `add_recurring_events/2` below.
   """
 
   alias ExIcal.Event
   alias Timex.{Date,DateTime}
 
   @doc """
-  Add recurring events to events list.
+  Add recurring events to events list
 
   ## Parameters
-    - events: events list
-    - end_date: how long recurrence will occur
+
+    - `events`: List of events that each may contain an rrule. See `ExIcal.Event`.
+
+    - `end_date` *(optional)*: A date time that represents the fallback end date
+      for a recurring event. This value is only used when the options specified
+      in rrule result in an infinite recurrance (ie. when neither `count` nor
+      `until` is set). If no end_date is set, it will default to
+      `Timex.Date.now`.
+
+  ## Event rrule options
+
+    Event recurrance details are specified in the `rrule`. The following options
+    are considered:
+
+    - `freq`: Represents how frequently the event recurs. Allowed frequencies
+      are `DAILY`, `WEEKLY`, and `MONTHLY`. These can be further modified by
+      the `interval` option.
+
+    - `count` *(optional)*: Represents the number of times that an event will
+      recur. This takes precedence over the `end_date` parameter and the
+      `until` option.
+
+    - `interval` *(optional)*: Represents the interval at which events occur.
+      This option works in concert with `freq` above; by using the `interval`
+      option, an event could recur every 5 days or every 3 weeks.
+
+    - `until` *(optional)*: Represents the end date for a recurring event.
+      This takes precedence over the `end_date` parameter.
+
+    The `freq` option is required for a valid rrule, but the others are
+    optional. They may be used either individually (ex. just `freq`) or in
+    concert (ex. `freq` + `interval` + `until`).
+
+  ## Examples
+
+      iex> dt = Timex.Date.from({2016,8,13})
+      iex> dt_end = Timex.Date.from({2016, 8, 23})
+      iex> events = [%ExIcal.Event{rrule:%{freq: "DAILY"}, start: dt, end: dt}]
+      iex> ExIcal.Recurrence.add_recurring_event(events, dt_end) |> length
+      10
   """
 
   @spec add_recurring_events([%Event{}])              :: [%Event{}]
@@ -33,7 +74,6 @@ defmodule ExIcal.Recurrence do
           revents ++ (event |> add_recurring_events_until(end_date, [days: interval]))
         %{freq: "DAILY"} ->
           revents ++ (event |> add_recurring_events_until(end_date, [days: 1]))
-
 
         %{freq: "WEEKLY", count: count, interval: interval} ->
           revents ++ (event |> add_recurring_events_count(count, [days: interval * 7]))

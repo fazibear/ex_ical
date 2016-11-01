@@ -1,14 +1,29 @@
 defmodule ExIcal.Parser do
   @moduledoc """
-  Ical parser module
+  Responsible for parsing an iCal string into a list of events.
+
+  This module contains one public function, `parse/1`.
+
+  Most of the most frequently used iCalendar properties can be parsed from the
+  file (for example: start/end time, description, recurrence rules, and more;
+  see `ExIcal.Event` for a full list).
+
+  However, there is not yet full coverage of all properties available in the
+  iCalendar spec. More properties will be added over time, but if you need a
+  legal iCalendar property that `ExIcal` does not yet support, please sumbit an
+  issue on GitHub.
   """
 
   alias ExIcal.{DateParser,Event}
 
   @doc """
-  Parse ical data. Returns `Event` struct.
+  Parses an iCal string into a list of events.
+
+  This function takes a single argument–a string in iCalendar format–and returns
+  a list of `%ExIcal.Event{}`.
 
   ## Example
+
   ```elixir
   HTTPotion.get("url-for-icalendar").body
     |> ExIcal.parse
