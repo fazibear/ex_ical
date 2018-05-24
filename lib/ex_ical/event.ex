@@ -37,19 +37,24 @@ defmodule ExIcal.Event do
       Defines the categories for a calendar component. Corresponds to
       the iCal `CATEGORIES` property ([4.8.1.2 Categories Rule]).
 
+    - `uid`:
+      Defines the persistent, globally unique identifier for the calendar component.
+      Corresponds to the iCal `UID` property ([4.8.4.7 Unique Identifier]).
+
   [RFC 2445]: https://www.ietf.org/rfc/rfc2445.txt
-  [4.8.2.4 Date/Time Start]: http://www.kanzaki.com/docs/ical/dtstart.html
-  [4.8.2.2 Date/Time End]:   http://www.kanzaki.com/docs/ical/dtend.html
-  [4.8.7.2 Date/Time Stamp]: http://www.kanzaki.com/docs/ical/dtstamp.html
-  [4.8.1.5 Description]:     http://www.kanzaki.com/docs/ical/description.html
-  [4.8.1.12 Summary]:        http://www.kanzaki.com/docs/ical/summary.html
-  [4.8.5.4 Recurrence Rule]: http://www.kanzaki.com/docs/ical/rrule.html
-  [4.8.1.2 Categories Rule]: https://www.kanzaki.com/docs/ical/categories.html
+  [4.8.2.4 Date/Time Start]:   http://www.kanzaki.com/docs/ical/dtstart.html
+  [4.8.2.2 Date/Time End]:     http://www.kanzaki.com/docs/ical/dtend.html
+  [4.8.7.2 Date/Time Stamp]:   http://www.kanzaki.com/docs/ical/dtstamp.html
+  [4.8.1.5 Description]:       http://www.kanzaki.com/docs/ical/description.html
+  [4.8.1.12 Summary]:          http://www.kanzaki.com/docs/ical/summary.html
+  [4.8.5.4 Recurrence Rule]:   http://www.kanzaki.com/docs/ical/rrule.html
+  [4.8.1.2 Categories Rule]:   https://www.kanzaki.com/docs/ical/categories.html
+  [4.8.4.7 Unique Identifier]: https://www.kanzaki.com/docs/ical/uid.html
 
   While this covers many of the commonly-used properties of an iCal `VEVENT`,
   `ExIcal` does not yet have full coverage of all valid properties. More
   properties will be added over time, but if you need a legal iCalendar
-  property that `ExIcal` does not yet support, please sumbit an issue on GitHub.
+  property that `ExIcal` does not yet support, please submit an issue on GitHub.
   """
   defstruct start: nil,
             end: nil,
@@ -57,5 +62,6 @@ defmodule ExIcal.Event do
             description: nil,
             summary: nil,
             rrule: nil,
-            categories: nil
+            categories: nil,
+            uid: nil
 end
