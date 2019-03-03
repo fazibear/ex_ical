@@ -36,9 +36,12 @@ defmodule ExIcal.Parser do
     data
     |> String.replace(~s"\n\t", ~S"\n")
     |> String.replace(~s"\n\x20", ~S"\n")
+    |> String.replace(~s"\"", "")
     |> String.split("\n")
     |> Enum.reduce(%{events: []}, fn(line, data) ->
-      parse_line(String.strip(line), data)
+      line
+      |> String.trim() 
+      |> parse_line(data)
     end)
     |> Map.get(:events)
   end
