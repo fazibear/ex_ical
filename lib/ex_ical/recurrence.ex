@@ -138,8 +138,17 @@ defmodule ExIcal.Recurrence do
 
   defp shift_event(event, shift_opts) do
     new_event = event
-    new_event = %{new_event | start: Timex.shift(event.start, shift_opts)}
-    new_event = %{new_event | end: Timex.shift(event.end, shift_opts)}
+    new_event = %{new_event | start: shift_date(event.start, shift_opts)}
+    new_event = %{new_event | end: shift_date(event.end, shift_opts)}
     new_event
+  end
+
+  defp shift_date(date, shift_opts) do
+    case Timex.shift(date, shift_opts) do
+      %Timex.AmbiguousDateTime{} = new_date ->
+        new_date.after
+      new_date ->
+        new_date
+    end
   end
 end
