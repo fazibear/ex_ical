@@ -27,7 +27,7 @@ defmodule ExIcal.Recurrence do
     are considered:
 
     - `freq`: Represents how frequently the event recurs. Allowed frequencies
-      are `DAILY`, `WEEKLY`, and `MONTHLY`. These can be further modified by
+      are `DAILY`, `WEEKLY`, `MONTHLY` and `YEARLY`. These can be further modified by
       the `interval` option.
 
     - `count` *(optional)*: Represents the number of times that an event will
