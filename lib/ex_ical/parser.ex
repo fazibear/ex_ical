@@ -38,10 +38,12 @@ defmodule ExIcal.Parser do
     |> String.replace(~s"\n\x20", ~S"\n")
     |> String.replace(~s"\"", "")
     |> String.split("\n")
-    |> Enum.reduce(%{events: []}, fn(line, data) ->
-      line
-      |> String.trim() 
-      |> parse_line(data)
+    |> Enum.reduce_while(%{events: []}, fn(line, data) ->
+      line = String.trim(line)
+      case String.starts_with?(line, "BEGIN:VTIMEZONE") do
+        true -> {:halt, data}
+        false -> {:cont, parse_line(line, data)}
+      end
     end)
     |> Map.get(:events)
   end
